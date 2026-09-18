@@ -52,7 +52,11 @@ services:
           start_period: 40s
 
     blacksmithV1:
+        build:
+            context: ./blacksmithAI
+            dockerfile: Dockerfile
         image: blacksmith_v1
+
         ports:
             - "127.0.0.1:2024:8000"
         depends_on:
@@ -71,15 +75,13 @@ services:
                     memory: 256M
                     cpus: '0.25'
         volumes:
-            # - ./blacksmithAI/config.json:/deps/blacksmithAI/config.json:ro
             - ./blacksmithAI:/deps/blacksmithAI
         env_file:
-            #- ./blacksmithAI/.env  # This loads all variables from .env
+            - ./blacksmithAI/.env  # This loads all variables from .env
             - ./.env  # This loads all variables from .env
         environment:
             REDIS_URI: redis://blacksmith-redis:6379
             DATABASE_URI: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@blacksmith-postgres:5432/${POSTGRES_DB}?sslmode=disable
-            container_uri: http://mini-kali-slim:9756/exec
             #LANGCHAIN_TRACING_V2: "false"
             OTEL_SDK_DISABLED: "true"
             N_JOBS_PER_WORKER: "10"  # Reduce concurrent background jobs
