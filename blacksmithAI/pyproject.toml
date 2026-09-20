@@ -22,13 +22,11 @@ dependencies = [
     "langgraph>=1.0.8",
     "langgraph-checkpoint>=4.0.0",
     "langgraph-prebuilt>=1.0.7",
-    "langgraph-sdk>=0.4.4",
+    "langgraph-sdk==0.3.6",
 
     # CLI with inmem extra – pinned carefully (this extra often pulls newer langgraph-api)
-    "langgraph-cli[inmem]>=0.4.12",
 
     # API server components – these were the main source of drift on Device 2
-    "langgraph-api>=0.7.37",
 
     # LLM providers – pinned to working versions (newer ones caused issues)
     "anthropic==0.79.0",
@@ -47,6 +45,8 @@ dependencies = [
     "duckduckgo-search>=8.1.1",
     "huggingface-hub>=1.4.1",                 # bumped slightly from your original for safety
     "rich>=14.3.2",
+    "prompt-toolkit>=3.0.50",
+    "requests>=2.32.0",
 ]
 
 # Optional: Add these if you want even stricter control (highly recommended)
@@ -56,4 +56,3 @@ resolution = "highest"   # or "lowest-direct" for more conservative
 
 [tool.setuptools.packages.find]
 include = ["store", "agents", "outputs", "tools", "utils"]
-

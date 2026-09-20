@@ -55,7 +55,7 @@ services:
         build:
             context: ./blacksmithAI
             dockerfile: Dockerfile
-        image: blacksmith_v1
+        image: yohannesgk/blacksmith_v1:latest
         ports:
             - "127.0.0.1:2024:8000"
         depends_on:
@@ -70,7 +70,6 @@ services:
             - ./blacksmithAI:/deps/blacksmithAI
         env_file:
             - ./blacksmithAI/.env
-            - ./.env
         environment:
             REDIS_URI: redis://blacksmith-redis:6379
             DATABASE_URI: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@blacksmith-postgres:5432/${POSTGRES_DB}?sslmode=disable
@@ -88,5 +87,3 @@ services:
 networks:
   default:
     name: blacksmith-shared
-    external: true
-
